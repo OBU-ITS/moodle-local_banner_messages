@@ -28,34 +28,27 @@ require_once('../../config.php');
 // require_once($CFG->dirroot. '/local/banner_messages/lib.php');
 require_once($CFG->dirroot. '/local/banner_messages/message_form.php');
 
-
-$context = context_system::instance();
-$PAGE->set_context($context);
-
 if ($USER->id == 0) {
     redirect(new moodle_url('/'));
 }
 
+$PAGE->set_context(context_system::instance());
 $PAGE->set_url(new moodle_url('/local/banner_messages/banner_holds.php'));
+$messageform = new local_banner_messages_message_form();
+
+if($data = $messageform->get_data()) {
+    if($data->understand == 'yes') {
+        $GLOBALS['banner_holds'] = 0;
+        require_logout();
+        redirect(new moodle_url('/'));
+    }
+}
 
 $PAGE->set_pagelayout('base');
-
 $PAGE->set_title($SITE->fullname);
 $PAGE->set_heading(get_string('bannerholdsheader', 'local_banner_messages'));
 
-$messageform = new local_banner_messages_message_form();
 
 echo $OUTPUT->header();
-
 $messageform->display();
-
-$data = $messageform->get_data();
-
-if ($data->understand == 'yes') {
-    $GLOBALS['banner_holds'] = 0;
-//        \core\session\manager::kill_user_sessions($USER->id);
-    require_logout();
-//        $home = new moodle_url('/');
-}
-
 echo $OUTPUT->footer();
