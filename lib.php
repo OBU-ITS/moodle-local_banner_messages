@@ -22,15 +22,19 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-function local_banner_messages_before_standard_top_of_body_html()
+function local_banner_messages_after_require_login()
 {
     global $USER;
-
-    if (!isloggedin() || isguestuser()) {
+    if ($GLOBALS['banner_holds'] && $GLOBALS['banner_holds'] == 1) {
         return;
     }
+    if ((strpos($USER->profile['person_holds'], 'F3')) || (strpos($USER->profile['person_holds'], 'RX')) == true) {
+        redirect(new moodle_url('/local/banner_messages/banner_holds.php'));
+    }
+}
 
-    if (strpos($USER->profile["person_holds"],"F3") == true) {
-        return "<script>window.location.replace(\"https://www.brookes.ac.uk/alerts/moodle-access-blocked\")</script>";
+function local_banner_messages_after_config() {
+    if (isloggedin() && !isguestuser()) {
+        local_banner_messages_after_require_login();
     }
 }
