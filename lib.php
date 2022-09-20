@@ -28,6 +28,7 @@ function local_banner_messages_after_require_login()
     if ($GLOBALS['banner_holds'] && $GLOBALS['banner_holds'] == 1) {
         return;
     }
+
     if ((strpos($USER->profile['person_holds'], 'F3')) || (strpos($USER->profile['person_holds'], 'RX')) == true) {
         redirect(new moodle_url('/local/banner_messages/banner_holds.php'));
     }
