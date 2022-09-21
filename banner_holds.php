@@ -35,13 +35,8 @@ $PAGE->set_context(context_system::instance());
 $PAGE->set_url(new moodle_url('/local/banner_messages/banner_holds.php'));
 $messageform = new local_banner_messages_message_form();
 
-<<<<<<< HEAD
 if ($data = $messageform->get_data()) {
     if ($data->understand == 'yes') {
-=======
-if($data = $messageform->get_data()) {
-    if($data->understand == 'yes') {
->>>>>>> 1bf006cac8bbfb70390e1c6c60e16b26d057a61a
         $GLOBALS['banner_holds'] = 0;
         require_logout();
         redirect(new moodle_url('/'));
@@ -52,13 +47,7 @@ $PAGE->set_pagelayout('base');
 $PAGE->set_title($SITE->fullname);
 $PAGE->set_heading(get_string('bannerholdsheader', 'local_banner_messages'));
 
-<<<<<<< HEAD
 
 echo $OUTPUT->header();
 $messageform->display();
 echo $OUTPUT->footer();
-=======
-echo $OUTPUT->header();
-$messageform->display();
-echo $OUTPUT->footer();
->>>>>>> 1bf006cac8bbfb70390e1c6c60e16b26d057a61a
