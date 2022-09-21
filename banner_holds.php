@@ -25,7 +25,6 @@
 $GLOBALS['banner_holds'] = 1;
 
 require_once('../../config.php');
-// require_once($CFG->dirroot. '/local/banner_messages/lib.php');
 require_once($CFG->dirroot. '/local/banner_messages/message_form.php');
 
 if ($USER->id == 0) {
@@ -36,8 +35,8 @@ $PAGE->set_context(context_system::instance());
 $PAGE->set_url(new moodle_url('/local/banner_messages/banner_holds.php'));
 $messageform = new local_banner_messages_message_form();
 
-if($data = $messageform->get_data()) {
-    if($data->understand == 'yes') {
+if ($data = $messageform->get_data()) {
+    if ($data->understand == 'yes') {
         $GLOBALS['banner_holds'] = 0;
         require_logout();
         redirect(new moodle_url('/'));

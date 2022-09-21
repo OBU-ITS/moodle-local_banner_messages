@@ -22,8 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-function local_banner_messages_after_require_login()
-{
+function local_banner_messages_after_require_login() {
     global $USER;
     if ($GLOBALS['banner_holds'] && $GLOBALS['banner_holds'] == 1) {
         return;

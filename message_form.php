@@ -34,25 +34,23 @@ class local_banner_messages_message_form extends moodleform {
     public function definition() {
         global $USER;
 
-//        if ($USER->id == 0) {
-//            redirect(new moodle_url('/'));
-//        }
-
         if ((strpos($USER->profile['person_holds'], 'F3')) && (strpos($USER->profile['person_holds'], 'RX')) == true) {
-            $banner_hold_message = get_string('academicholdmessage', 'local_banner_messages').get_string('joinstring', 'local_banner_messages').get_string('financeholdmessage', 'local_banner_messages');
+            $bannerholdmessage = get_string('academicholdmessage', 'local_banner_messages');
+            $bannerholdmessage = $bannerholdmessage.get_string('joinstring', 'local_banner_messages');
+            $bannerholdmessage = $bannerholdmessage.get_string('financeholdmessage', 'local_banner_messages');
         }
-        elseif ((strpos($USER->profile['person_holds'], 'RX')) == true) {
-            $banner_hold_message = get_string('academicholdmessage', 'local_banner_messages');
+        else if ((strpos($USER->profile['person_holds'], 'RX')) == true) {
+            $bannerholdmessage = get_string('academicholdmessage', 'local_banner_messages');
         }
-        elseif ((strpos($USER->profile['person_holds'], 'F3')) == true) {
-            $banner_hold_message = get_string('financeholdmessage', 'local_banner_messages');
+        else if ((strpos($USER->profile['person_holds'], 'F3')) == true) {
+            $bannerholdmessage = get_string('financeholdmessage', 'local_banner_messages');
         }
 
         $mform    = $this->_form; // Don't forget the underscore!
 
-        $mform->addElement('html', $banner_hold_message);
+        $mform->addElement('html', $bannerholdmessage);
         $mform->addElement('hidden', 'understand', 'yes');
-        $buttonlabel = get_string('acknowledge','local_banner_messages');
+        $buttonlabel = get_string('acknowledge', 'local_banner_messages');
         $mform->addElement('submit', 'submitmessage', $buttonlabel);
 
     }
