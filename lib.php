@@ -22,6 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+<<<<<<< HEAD
 function local_banner_messages_after_require_login() {
     global $USER;
     if ($GLOBALS['banner_holds'] && $GLOBALS['banner_holds'] == 1) {
@@ -35,8 +36,58 @@ function local_banner_messages_after_require_login() {
     }
 }
 
+=======
+>>>>>>> 1bf006cac8bbfb70390e1c6c60e16b26d057a61a
 function local_banner_messages_after_config() {
     if (isloggedin() && !isguestuser()) {
         local_banner_messages_after_require_login();
     }
 }
+<<<<<<< HEAD
+=======
+
+function local_banner_messages_after_require_login()
+{
+    global $USER;
+
+    if (is_siteadmin($USER->id) || !isloggedin() || isguestuser()) {
+        return;
+    }
+
+    if (isset($GLOBALS['banner_holds']) && $GLOBALS['banner_holds'] == 1) {
+        return;
+    }
+
+    if (!strpos($USER->profile['person_holds'], 'F3') && !strpos($USER->profile['person_holds'], 'RX')) {
+        return;
+    }
+
+    if(requiresUserHold($USER)) {
+        try {
+            redirect(new moodle_url('/local/banner_messages/banner_holds.php'));
+        }
+        catch (moodle_exception $e) { }
+    }
+}
+
+function requiresUserHold(object $user) : bool {
+    $holds = json_decode($user->profile['person_holds']);
+    foreach($holds as $hold) {
+        if(property_exists($hold, "typeCode") && !in_array($hold->typeCode, ["F3", "RX"])) {
+            continue;
+        }
+
+        if(property_exists($hold, "endOn") && strtotime($hold->endOn) < time()) {
+            continue;
+        }
+
+        if(property_exists($hold, "startOn") && strtotime($hold->startOn) > time()) {
+            continue;
+        }
+
+        return true;
+    }
+
+    return false;
+}
+>>>>>>> 1bf006cac8bbfb70390e1c6c60e16b26d057a61a
