@@ -36,6 +36,7 @@ function local_banner_messages_after_require_login() {
     }
 
     if (isset($GLOBALS['banner_holds']) && $GLOBALS['banner_holds'] == 1) {
+        $GLOBALS['banner_holds'] = 0;
         return;
     }
 
