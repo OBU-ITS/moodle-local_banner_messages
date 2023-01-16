@@ -34,16 +34,36 @@ class local_banner_messages_message_form extends moodleform {
     public function definition() {
         global $USER;
 
-        if ((strpos($USER->profile['person_holds'], 'F3')) && (strpos($USER->profile['person_holds'], 'RX')) == true) {
+        if ((strpos($USER->profile['person_holds'], 'F3')) && (strpos($USER->profile['person_holds'], 'RX')) && (strpos($USER->profile['person_holds'], 'V2')) == true) {
             $bannerholdmessage = get_string('academicholdmessage', 'local_banner_messages');
             $bannerholdmessage = $bannerholdmessage.get_string('joinstring', 'local_banner_messages');
             $bannerholdmessage = $bannerholdmessage.get_string('financeholdmessage', 'local_banner_messages');
+            $bannerholdmessage = $bannerholdmessage.get_string('joinstring', 'local_banner_messages');
+            $bannerholdmessage = $bannerholdmessage.get_string('visaholdmessage', 'local_banner_messages');
+        }
+        else if ((strpos($USER->profile['person_holds'], 'F3')) && (strpos($USER->profile['person_holds'], 'RX')) == true) {
+            $bannerholdmessage = get_string('academicholdmessage', 'local_banner_messages');
+            $bannerholdmessage = $bannerholdmessage.get_string('joinstring', 'local_banner_messages');
+            $bannerholdmessage = $bannerholdmessage.get_string('financeholdmessage', 'local_banner_messages');
+        }
+        else if ((strpos($USER->profile['person_holds'], 'F3')) && (strpos($USER->profile['person_holds'], 'V2')) == true) {
+            $bannerholdmessage = get_string('financeholdmessage', 'local_banner_messages');
+            $bannerholdmessage = $bannerholdmessage.get_string('joinstring', 'local_banner_messages');
+            $bannerholdmessage = $bannerholdmessage.get_string('visaholdmessage', 'local_banner_messages');
+        }
+        else if ((strpos($USER->profile['person_holds'], 'RX')) && (strpos($USER->profile['person_holds'], 'V2')) == true) {
+            $bannerholdmessage = get_string('academicholdmessage', 'local_banner_messages');
+            $bannerholdmessage = $bannerholdmessage.get_string('joinstring', 'local_banner_messages');
+            $bannerholdmessage = $bannerholdmessage.get_string('visaholdmessage', 'local_banner_messages');
         }
         else if ((strpos($USER->profile['person_holds'], 'RX')) == true) {
             $bannerholdmessage = get_string('academicholdmessage', 'local_banner_messages');
         }
         else if ((strpos($USER->profile['person_holds'], 'F3')) == true) {
             $bannerholdmessage = get_string('financeholdmessage', 'local_banner_messages');
+        }
+        else if ((strpos($USER->profile['person_holds'], 'V2')) == true) {
+            $bannerholdmessage = get_string('visaholdmessage', 'local_banner_messages');
         }
 
         $mform    = $this->_form; // Don't forget the underscore!
