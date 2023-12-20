@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_banner_messages';
-$plugin->release = '0.1.3';
-$plugin->version = 2022092401;
+$plugin->release = '0.1.4';
+$plugin->version = 2023011700;
 $plugin->requires = 2021051700;
 $plugin->maturity = MATURITY_ALPHA;

@@ -40,7 +40,7 @@ function local_banner_messages_after_require_login() {
         return;
     }
 
-    if (!strpos($USER->profile['person_holds'], 'F3') && !strpos($USER->profile['person_holds'], 'RX')) {
+    if (!strpos($USER->profile['person_holds'], 'F3') && !strpos($USER->profile['person_holds'], 'RX') && !strpos($USER->profile['person_holds'], 'V2')) {
         return;
     }
 
@@ -55,7 +55,7 @@ function local_banner_messages_after_require_login() {
 function requiresUserHold(object $user) : bool {
     $holds = json_decode($user->profile['person_holds']);
     foreach($holds as $hold) {
-        if(property_exists($hold, "typeCode") && !in_array($hold->typeCode, ["F3", "RX"])) {
+        if(property_exists($hold, "typeCode") && !in_array($hold->typeCode, ["F3", "RX", "V2"])) {
             continue;
         }
 
