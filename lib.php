@@ -22,11 +22,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-function local_banner_messages_after_config() {
+/*function local_banner_messages_after_config() {
     if (isloggedin() && !isguestuser()) {
         local_banner_messages_after_require_login();
     }
-}
+}*/
 
 function local_banner_messages_after_require_login() {
     global $USER;
